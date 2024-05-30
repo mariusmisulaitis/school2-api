@@ -1,9 +1,9 @@
-package org.marius.schoolapi.services;
+package org.marius.school2api.services;
 
 import lombok.RequiredArgsConstructor;
-import org.marius.schoolapi.entities.School;
-import org.marius.schoolapi.entities.Student;
-import org.marius.schoolapi.repositories.SchoolRepository;
+import org.marius.school2api.entities.Student;
+import org.marius.school2api.entities.School;
+import org.marius.school2api.repositories.SchoolRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

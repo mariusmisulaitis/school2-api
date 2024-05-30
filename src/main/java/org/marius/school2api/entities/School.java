@@ -1,31 +1,31 @@
-package org.marius.schoolapi.entities;
+package org.marius.school2api.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class Student {
+public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String title;
 
-    private String lastname;
-
-    private Date birthdate;
+    private String address;
 
     private String phoneNo;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "school_id")
+    private List<Student> students;
 
     @CreatedDate
     private Date createdAt;

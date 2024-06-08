@@ -68,7 +68,8 @@ public class SchoolController {
     }
 
     @PostMapping("/{schoolId}/students")
-    public ResponseEntity<CreateStudentResponse> addStudentToSchoolById(@PathVariable Long schoolId, @RequestBody CreateStudentRequest createStudentRequest) {
+    public ResponseEntity<CreateStudentResponse> addStudentToSchoolById(@PathVariable Long schoolId,
+                                                                        @RequestBody CreateStudentRequest createStudentRequest) {
         School school = this.schoolService.addStudentToSchoolBySchoolId(schoolId, createStudentRequest);
         if (school == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -78,9 +79,13 @@ public class SchoolController {
 
 
     @GetMapping("/{schoolId}/students/{studentId}")
-    public StudentResponse getStudentBySchoolIdAndStudentId(@PathVariable Long schoolId, @PathVariable Long studentId) {
-        return StudentConverter.convertStudentEntityToResponse(
-                this.schoolService.getStudentBySchoolIdAndStudentId(schoolId, studentId));
-    }
+    public ResponseEntity<StudentResponse> getStudentBySchoolIdAndStudentId(@PathVariable Long schoolId,
+                                                                            @PathVariable Long studentId) {
+        Student student = this.schoolService.getStudentBySchoolIdAndStudentId(schoolId, studentId);
+        if (student == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
+        }
+        return ResponseEntity.ok(StudentConverter.convertStudentEntityToResponse(student));
+    }
 }

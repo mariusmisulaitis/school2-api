@@ -1,12 +1,16 @@
 package org.marius.school2api.converters;
 
+import org.marius.school2api.dto.CreateSchoolResponse;
+import org.marius.school2api.dto.CreateStudentResponse;
 import org.marius.school2api.dto.SchoolResponse;
 import org.marius.school2api.entities.School;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchoolConverter {
+public abstract class SchoolConverter {
+
+    private SchoolConverter(){}
 
     public static SchoolResponse convertSchoolEntityToResponse(School school) {
         SchoolResponse schoolResponse = null;
@@ -21,7 +25,11 @@ public class SchoolConverter {
         return schoolResponse;
     }
 
-    public static List<SchoolResponse> convertSchoolEntityListToResponseList(List<School> schools) {
+    public static CreateSchoolResponse convertSchoolEntityToCreateResponse(School school) {
+        return new CreateSchoolResponse(convertSchoolEntityToResponse(school));
+    }
+
+    public static List<SchoolResponse> convertSchoolEntityListToResponse(List<School> schools) {
         List<SchoolResponse> schoolResponses = null;
         if (schools != null) {
             schoolResponses = new ArrayList<>();
@@ -30,5 +38,13 @@ public class SchoolConverter {
             }
         }
         return schoolResponses;
+    }
+
+    public static CreateStudentResponse convertSchoolToCreateStudentResponse(School school) {
+        CreateStudentResponse createStudentResponse = null;
+        if (school != null) {
+            createStudentResponse = new CreateStudentResponse(SchoolConverter.convertSchoolEntityToResponse(school), StudentConverter.convertStudentEntityListToResponse(school.getStudents()));
+        }
+        return createStudentResponse;
     }
 }

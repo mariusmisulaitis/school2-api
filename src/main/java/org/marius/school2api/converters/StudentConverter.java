@@ -6,7 +6,10 @@ import org.marius.school2api.entities.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentConverter {
+public abstract class StudentConverter {
+
+    private StudentConverter() {}
+
     public static StudentResponse convertStudentEntityToResponse(Student student) {
         StudentResponse studentResponse = null;
         if (student != null) {
@@ -21,7 +24,7 @@ public class StudentConverter {
         return studentResponse;
     }
 
-    public static List<StudentResponse> convertStudentEntityListToResponseList(List<Student> students) {
+    public static List<StudentResponse> convertStudentEntityListToResponse(List<Student> students) {
         List<StudentResponse> studentResponses = null;
         if (students != null) {
             studentResponses = new ArrayList<>();

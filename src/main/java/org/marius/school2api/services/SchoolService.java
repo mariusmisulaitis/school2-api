@@ -40,6 +40,13 @@ public class SchoolService {
 //            }
 //        }
 //        return null;
+
+        School school = getSchoolById(schoolId);
+
+        if (school == null) {
+            return null;
+        }
+
         return getSchoolById(schoolId).getStudents().stream()
                 .filter(student -> student.getId().equals(studentId))
                 .findFirst()
